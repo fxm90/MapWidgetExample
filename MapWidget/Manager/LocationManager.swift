@@ -59,9 +59,7 @@ final class LocationManager: NSObject {
             let locationManager = CLLocationManager()
             self.locationManager = locationManager
 
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.activityType = .otherNavigation
-
             locationManager.delegate = self
         }
     }
