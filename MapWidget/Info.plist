@@ -26,9 +26,9 @@
 		<string>com.apple.widgetkit-extension</string>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>MapWidget needs your location to show it on the map.</string>
+	<string>We need access to your location to show it on the map.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>MapWidget needs your location to show it on the map.</string>
+	<string>We need access to your location to show it on the map.</string>
 	<key>NSWidgetWantsLocation</key>
 	<true/>
 </dict>

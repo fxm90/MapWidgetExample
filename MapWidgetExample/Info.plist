@@ -47,8 +47,8 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>MapWidget needs your location to show it on the map.</string>
+	<string>We need access to your location to show it on the map inisde the widget.</string>
 	<key>NSLocationUsageDescription</key>
-	<string>MapWidget needs your location to show it on the map.</string>
+	<string>We need access to your location to show it on the map inisde the widget.</string>
 </dict>
 </plist>
