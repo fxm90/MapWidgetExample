@@ -10,6 +10,9 @@ import WidgetKit
 import SwiftUI
 
 struct MapTimelineEntry: TimelineEntry {
+    /// The date to display the widget. This property is required by the protocol `TimelineEntry`.
     let date: Date
+
+    /// The map-image to display. In case the `MKMapSnapshotter` failed to create an image this property is `nil`.
     let mapImage: Image?
 }
