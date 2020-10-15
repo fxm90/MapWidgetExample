@@ -14,13 +14,13 @@ struct MapWidget: Widget {
     // MARK: - Config
 
     private enum Config {
-        ///
+        /// The name shown for a widget when a user adds or edits it.
         static let displayName = "Map Widget"
 
-        ///
+        /// The description shown for a widget when a user adds or edits it.
         static let description = "This is an example widget showing a map."
 
-        ///
+        /// The sizes that our widget supports.
         static let supportedFamilies: [WidgetFamily] = [.systemSmall, .systemMedium]
     }
 
