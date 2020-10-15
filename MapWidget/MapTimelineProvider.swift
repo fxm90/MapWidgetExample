@@ -10,6 +10,13 @@ import WidgetKit
 import SwiftUI
 
 struct MapTimelineProvider: TimelineProvider {
+    // MARK: - Config
+
+    private enum Config {
+        /// Update widget after one minute to always show an up to date user location.
+        static let refreshTimeInterval: TimeInterval = 60
+    }
+
     // MARK: - Dependencies
 
     private let locationManager: LocationManager
@@ -48,7 +55,7 @@ struct MapTimelineProvider: TimelineProvider {
             let mapTimelineEntry = MapTimelineEntry(date: Date(),
                                                     mapImage: mapImage)
 
-            let refreshDate = Date(timeIntervalSinceNow: 1 * 60)
+            let refreshDate = Date(timeIntervalSinceNow: Config.refreshTimeInterval)
             let timeline = Timeline(entries: [mapTimelineEntry],
                                     policy: .after(refreshDate))
 
