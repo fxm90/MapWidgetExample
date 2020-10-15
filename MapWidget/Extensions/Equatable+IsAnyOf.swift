@@ -1,6 +1,6 @@
 //
 //  Equatable+IsAnyOf.swift
-//  MapWidgetExtension
+//  MapWidget
 //
 //  Created by Felix Mau on 15.10.20.
 //  Copyright © 2020 Felix Mau. All rights reserved.
