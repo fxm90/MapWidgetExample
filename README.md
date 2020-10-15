@@ -1,7 +1,7 @@
 # Map Widget Example 🗺
 Example application showing how to display a map with the current user-location inside a widget.
 
-![Widget](./Assets/widget.png)
+[![Widget][widget-thumbnail]][widget]
 
 **Note:** As a `UIViewRepresentable` is not supported in widgets, Apple's recommendation for displaying maps inside widgets is to use a [`MKMapSnapshotter`](https://developer.apple.com/documentation/mapkit/mkmapsnapshotter).
 
@@ -29,3 +29,7 @@ This is already done in this example application.
 ## Links
 - [Creating a Widget Extension](https://developer.apple.com/documentation/widgetkit/creating-a-widget-extension)
 - [Keeping a Widget Up To Date](https://developer.apple.com/documentation/widgetkit/keeping-a-widget-up-to-date)
+
+
+[widget]: Assets/widget.png
+[widget-thumbnail]: Assets/widget-thumbnail.png
