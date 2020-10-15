@@ -72,17 +72,19 @@ struct MapWidgetView: View {
 
 // MARK: - Preview
 
-struct Widget_Previews: PreviewProvider {
-    static var previews: some View {
-        let mapTimelineEntry = MapTimelineEntry(date: Date(),
-                                                mapImage: Image("MapHamburg"))
+#if DEBUG
+    struct MapWidgetView_Previews: PreviewProvider {
+        static var previews: some View {
+            let mapTimelineEntry = MapTimelineEntry(date: Date(),
+                                                    mapImage: Image("MapHamburg"))
 
-        return Group {
-            MapWidgetView(entry: mapTimelineEntry)
-                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            return Group {
+                MapWidgetView(entry: mapTimelineEntry)
+                    .previewContext(WidgetPreviewContext(family: .systemSmall))
 
-            MapWidgetView(entry: mapTimelineEntry)
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                MapWidgetView(entry: mapTimelineEntry)
+                    .previewContext(WidgetPreviewContext(family: .systemMedium))
+            }
         }
     }
-}
+#endif
