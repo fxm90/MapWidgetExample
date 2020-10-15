@@ -21,7 +21,6 @@ final class LocationManager: NSObject {
 
     // MARK: - Dependencies
 
-    ///
     private var locationManager: CLLocationManager?
 
     // MARK: - Initializer
@@ -72,7 +71,7 @@ final class LocationManager: NSObject {
 extension LocationManager: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         guard manager.authorizationStatus.isAuthorized else {
-            // Ignore changes where we loose authorization.
+            // Ignore authorization changes where we loose access to location data.
             return
         }
 
@@ -106,7 +105,7 @@ extension LocationManager: CLLocationManagerDelegate {
 // MARK: - Helpers
 
 private extension CLAuthorizationStatus {
-    ///
+    /// Boolean flag whether we're authorized to access location data.
     var isAuthorized: Bool {
         isAny(of: .authorizedAlways, .authorizedWhenInUse)
     }
