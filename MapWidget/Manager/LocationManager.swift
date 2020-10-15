@@ -37,7 +37,7 @@ final class LocationManager: NSObject {
         requestLocationCompletionHandlers.append(completionHandler)
 
         guard let locationManager = locationManager else {
-            "Expect to have a valid `locationManager` at this point!"
+            "Expect to have a valid `locationManager` instance at this point!"
                 .log(level: .error)
 
             return
