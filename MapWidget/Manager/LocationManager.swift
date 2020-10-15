@@ -108,6 +108,6 @@ extension LocationManager: CLLocationManagerDelegate {
 private extension CLAuthorizationStatus {
     ///
     var isAuthorized: Bool {
-        self == .authorizedAlways || self == .authorizedWhenInUse
+        isAny(of: .authorizedAlways, .authorizedWhenInUse)
     }
 }
