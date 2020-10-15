@@ -5,6 +5,9 @@
 
 **Note:** As a `UIViewRepresentable` is not supported in widgets, Apple's recommendation for displaying maps inside widgets is to use a [`MKMapSnapshotter`](https://developer.apple.com/documentation/mapkit/mkmapsnapshotter).
 
+## How to use
+📲 – Clone the repository and run `pod install` in the terminal to install the dependencies. Afterwards run the Application and add the `MapWidgetExample` to your home screen.
+
 ## Privacy related code
 🔐 – To receive the current user-location you have to add the following lines to the `Info.plist` of your application.
 
