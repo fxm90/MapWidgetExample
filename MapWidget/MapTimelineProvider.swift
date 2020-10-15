@@ -42,8 +42,8 @@ struct MapTimelineProvider: TimelineProvider {
                      completion: @escaping (Timeline<MapTimelineEntry>) -> Void) {
         //
         mapSnapshotForCurrentUserLocation { mapImage in
-            // Because our app can’t “predict” its future state like a Weather app, creating a timeline with a single entry that
-            // should be displayed immediately will suffice. This can be done by setting the entry’s date to the current Date().
+            // > Because our app can’t “predict” its future state like a Weather app, creating a timeline with a single entry that
+            // > should be displayed immediately will suffice. This can be done by setting the entry’s date to the current Date().
             // https://medium.com/better-programming/how-to-create-widgets-in-ios-14-8cf58d34ce89
             let mapTimelineEntry = MapTimelineEntry(date: Date(),
                                                     mapImage: mapImage)

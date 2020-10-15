@@ -23,7 +23,9 @@ final class MapSnapshotManager {
     // MARK: - Config
 
     private enum Config {
+        /// The coordinate span to use when rendering the map.
         ///
+        /// - SeeAlso: https://developer.apple.com/documentation/mapkit/mkcoordinatespan
         static let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.005,
                                                      longitudeDelta: 0.005)
     }

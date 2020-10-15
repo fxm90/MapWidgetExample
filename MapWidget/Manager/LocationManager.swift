@@ -54,6 +54,7 @@ final class LocationManager: NSObject {
 
     private func setupLocationManager() {
         // We have to explicitly make sure to intialize the location manger on the main thread.
+        // This is not happening per default when instantiating the widget.
         DispatchQueue.main.async {
             let locationManager = CLLocationManager()
             self.locationManager = locationManager
