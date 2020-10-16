@@ -9,7 +9,7 @@ Example application showing how to display a map with the current user-location 
 📲 Clone the repository and run `pod install` in the terminal to install the dependencies. Afterwards run the example application, allow access to location data and add the widget named `MapWidgetExample` to your home screen.
 
 ## Widget
-🧪 All code for the widget lives inside the folder `MapWidget`. The corresponding application code inside the folder `MapWidgetExample` does not contain any logic.
+🧪 All code for the widget lives inside the folder `MapWidget`. The corresponding application code inside the folder `MapWidgetExample` does not contain any logic other than requesting access to location data.
 
 ## Requesting Authorization for Location Services
 🔐 To receive the current user-location you have to add the following lines to the `Info.plist` of your application.
