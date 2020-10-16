@@ -27,6 +27,7 @@
 		DC0204F52538C083004C9A67 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0204F02538C083004C9A67 /* LocationManager.swift */; };
 		DC0204FB2538C0CF004C9A67 /* MapTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0204FA2538C0CF004C9A67 /* MapTimelineProvider.swift */; };
 		DC2297E32538CD870084FE6B /* Equatable+IsAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2297E22538CD870084FE6B /* Equatable+IsAnyOf.swift */; };
+		DC83F5042539A88300D92549 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83F5032539A88300D92549 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		DC0204F02538C083004C9A67 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DC0204FA2538C0CF004C9A67 /* MapTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTimelineProvider.swift; sourceTree = "<group>"; };
 		DC2297E22538CD870084FE6B /* Equatable+IsAnyOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+IsAnyOf.swift"; sourceTree = "<group>"; };
+		DC83F5032539A88300D92549 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DEBE30711FAB0C2622819A01 /* Pods-MapWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-MapWidgetExtension/Pods-MapWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		DEFDBD80473C1AAE0A746721 /* Pods-MapWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapWidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-MapWidgetExtension/Pods-MapWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,8 +169,9 @@
 		DC0204632538BBEC004C9A67 /* MapWidgetExample */ = {
 			isa = PBXGroup;
 			children = (
+				DC83F5012539A86B00D92549 /* Manager */,
+				DC83F5022539A87600D92549 /* View */,
 				DC0204642538BBEC004C9A67 /* MapWidgetExampleApp.swift */,
-				DC0204662538BBEC004C9A67 /* ContentView.swift */,
 				DC0204682538BBEF004C9A67 /* Assets.xcassets */,
 				DC02046D2538BBEF004C9A67 /* Info.plist */,
 				DC02046A2538BBEF004C9A67 /* Preview Content */,
@@ -253,6 +256,22 @@
 				DC0204F02538C083004C9A67 /* LocationManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		DC83F5012539A86B00D92549 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DC83F5032539A88300D92549 /* LocationManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		DC83F5022539A87600D92549 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DC0204662538BBEC004C9A67 /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -497,6 +516,7 @@
 			files = (
 				DC0204672538BBEC004C9A67 /* ContentView.swift in Sources */,
 				DC0204652538BBEC004C9A67 /* MapWidgetExampleApp.swift in Sources */,
+				DC83F5042539A88300D92549 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

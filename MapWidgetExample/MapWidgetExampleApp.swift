@@ -10,9 +10,18 @@ import SwiftUI
 
 @main
 struct MapWidgetExampleApp: App {
+    // MARK: - Dependencies
+
+    private let locationManager = LocationManager()
+
+    // MARK: - Render
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    locationManager.requestWhenInUseAuthorization()
+                }
         }
     }
 }

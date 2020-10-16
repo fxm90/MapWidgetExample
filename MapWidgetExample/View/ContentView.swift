@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ContentView: View {
     var body: some View {
@@ -14,7 +15,7 @@ struct ContentView: View {
             Text("Nothing to see here.")
                 .font(.title)
 
-            Text("Please add the widget to your home screen and allow location access.")
+            Text("Please allow access to location data and add the widget to your home screen.")
         }
         .multilineTextAlignment(.center)
         .padding()
