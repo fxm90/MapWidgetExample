@@ -27,7 +27,7 @@ Privacy - Location Usage Description
 Widget Wants Location
 ```
 
-This is already done in this example application.
+**Note:** This is already done in this example application.
 
 ## Links
 - [Creating a Widget Extension](https://developer.apple.com/documentation/widgetkit/creating-a-widget-extension)
