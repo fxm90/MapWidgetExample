@@ -8,7 +8,7 @@
 
 import CoreLocation
 
-class LocationManager {
+final class LocationManager {
     // MARK: - Dependencies
 
     private let locationManager = CLLocationManager()
