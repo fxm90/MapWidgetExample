@@ -14,6 +14,19 @@ target 'MapWidgetExample' do
     # Pods for testing
   end
 
+  # Fix warning
+  # ```
+  # The iOS deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 8.0, but the range of
+  # supported deployment target versions is 9.0 to 14.0.99.
+  # ```
+  # Source: https://stackoverflow.com/a/58367269/3532505
+  post_install do |pi|
+      pi.pods_project.targets.each do |t|
+        t.build_configurations.each do |config|
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        end
+      end
+  end
 end
 
 target 'MapWidgetExtension' do
