@@ -44,7 +44,7 @@ struct MapUserLocationView: View {
     }
 }
 
-struct MapWidgetView: View {
+struct MapErrorView: View {
     // MARK: - Config
 
     private enum Config {
@@ -56,16 +56,46 @@ struct MapWidgetView: View {
 
     // MARK: - Public properties
 
+    let errorMessage: String?
+
+    // MARK: - Render
+
+    var body: some View {
+        ZStack(alignment: .bottomLeading) {
+            Rectangle()
+                .foregroundColor(Config.fallbackColor)
+
+            if let errorMessage = errorMessage {
+                Text(errorMessage)
+                    .font(.footnote)
+                    .padding()
+            }
+        }
+    }
+}
+
+struct MapWidgetView: View {
+    // MARK: - Public properties
+
     let entry: MapTimelineProvider.Entry
 
     // MARK: - Render
 
     var body: some View {
-        if let mapImage = entry.mapImage {
+        switch entry.mapImageResult {
+        case let .success(mapImage):
             MapUserLocationView(mapImage: mapImage)
-        } else {
-            Rectangle()
-                .foregroundColor(Config.fallbackColor)
+
+        case let .failure(error):
+            switch error {
+            case MapTimelineProvider.MapImageResultError.placeholder:
+                /// The timeline provider asked for a placeholder synchronously.
+                /// Therefore we simply show the `MapErrorView` without a specific `errorMessage`.
+                MapErrorView(errorMessage: nil)
+
+            default:
+                MapErrorView(errorMessage: error.localizedDescription)
+            }
         }
     }
 }

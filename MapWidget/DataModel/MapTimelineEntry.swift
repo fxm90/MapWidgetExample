@@ -13,6 +13,7 @@ struct MapTimelineEntry: TimelineEntry {
     /// The date to display the widget. This property is required by the protocol `TimelineEntry`.
     let date: Date
 
-    /// The map-image to display. In case the `MKMapSnapshotter` failed to create an image this property is `nil`.
-    let mapImage: Image?
+    /// The result of the location manager and map snapshotter, which is either the image of the map to display or
+    /// the error that occurred.
+    let mapImageResult: Result<Image, Error>
 }
