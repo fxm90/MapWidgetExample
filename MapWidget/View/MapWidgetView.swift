@@ -9,7 +9,7 @@
 import WidgetKit
 import SwiftUI
 
-struct MapUserLocationView: View {
+private struct MapUserLocationView: View {
     // MARK: - Config
 
     private enum Config {
@@ -44,7 +44,7 @@ struct MapUserLocationView: View {
     }
 }
 
-struct MapErrorView: View {
+private struct ErrorView: View {
     // MARK: - Config
 
     private enum Config {
@@ -91,10 +91,10 @@ struct MapWidgetView: View {
             case MapTimelineProvider.MapImageResultError.placeholder:
                 /// The timeline provider asked for a placeholder synchronously.
                 /// Therefore we simply show the `MapErrorView` without a specific `errorMessage`.
-                MapErrorView(errorMessage: nil)
+                ErrorView(errorMessage: nil)
 
             default:
-                MapErrorView(errorMessage: error.localizedDescription)
+                ErrorView(errorMessage: error.localizedDescription)
             }
         }
     }
