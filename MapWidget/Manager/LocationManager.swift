@@ -11,6 +11,13 @@ import CoreLocation
 
 /// Based on: https://gist.github.com/fxm90/8b6c9753f12fcf19991f6c3f0cd635d3
 final class LocationManager: NSObject {
+    // MARK: - Config
+
+    private enum Config {
+        /// The type of user activity associated with the location updates.
+        static let activityType: CLActivityType = .otherNavigation
+    }
+
     // MARK: - Types
 
     typealias RequestLocationCompletionHandler = (Result<CLLocation, Error>) -> Void
@@ -59,9 +66,14 @@ final class LocationManager: NSObject {
             let locationManager = CLLocationManager()
             self.locationManager = locationManager
 
-            locationManager.activityType = .otherNavigation
+            locationManager.activityType = Config.activityType
             locationManager.delegate = self
         }
+    }
+
+    private func resolveRequestLocationCompletionHandlers(with result: Result<CLLocation, Error>) {
+        requestLocationCompletionHandlers.forEach { $0(result) }
+        requestLocationCompletionHandlers.removeAll()
     }
 }
 
@@ -83,21 +95,17 @@ extension LocationManager: CLLocationManagerDelegate {
     }
 
     func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else {
-            // > If updates were deferred or if multiple locations arrived before they could be delivered, the array may contain additional entries.
-            // > The objects in the array are organized in the order in which they occurred. Therefore, the most recent location update is at the end
-            // > of the array.
-            // https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423615-locationmanager
+        // We explicitly ask for the `first` location here, as with `requestLocation()` only one location fix is reported to the delegate.
+        // https://developer.apple.com/documentation/corelocation/cllocationmanager/1620548-requestlocation
+        guard let userLocation = locations.first else {
             return
         }
 
-        requestLocationCompletionHandlers.forEach { $0(.success(location)) }
-        requestLocationCompletionHandlers.removeAll()
+        resolveRequestLocationCompletionHandlers(with: .success(userLocation))
     }
 
     func locationManager(_: CLLocationManager, didFailWithError error: Error) {
-        requestLocationCompletionHandlers.forEach { $0(.failure(error)) }
-        requestLocationCompletionHandlers.removeAll()
+        resolveRequestLocationCompletionHandlers(with: .failure(error))
     }
 }
 
