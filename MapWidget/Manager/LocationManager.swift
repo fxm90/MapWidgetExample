@@ -9,7 +9,6 @@
 import Foundation
 import CoreLocation
 
-/// Based on: https://gist.github.com/fxm90/8b6c9753f12fcf19991f6c3f0cd635d3
 final class LocationManager: NSObject {
     // MARK: - Config
 
