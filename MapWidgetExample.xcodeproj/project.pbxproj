@@ -28,6 +28,7 @@
 		DC0204FB2538C0CF004C9A67 /* MapTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0204FA2538C0CF004C9A67 /* MapTimelineProvider.swift */; };
 		DC2297E32538CD870084FE6B /* Equatable+IsAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2297E22538CD870084FE6B /* Equatable+IsAnyOf.swift */; };
 		DC83F5042539A88300D92549 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83F5032539A88300D92549 /* LocationManager.swift */; };
+		DC83F51B253C36BB00D92549 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC83F51A253C36BB00D92549 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		DC0204FA2538C0CF004C9A67 /* MapTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTimelineProvider.swift; sourceTree = "<group>"; };
 		DC2297E22538CD870084FE6B /* Equatable+IsAnyOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+IsAnyOf.swift"; sourceTree = "<group>"; };
 		DC83F5032539A88300D92549 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		DC83F51A253C36BB00D92549 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DEBE30711FAB0C2622819A01 /* Pods-MapWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-MapWidgetExtension/Pods-MapWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		DEFDBD80473C1AAE0A746721 /* Pods-MapWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapWidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-MapWidgetExtension/Pods-MapWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -220,6 +222,7 @@
 				DC0204C92538BE82004C9A67 /* MapWidget.swift */,
 				DC0204CB2538BE85004C9A67 /* Assets.xcassets */,
 				DC0204CD2538BE85004C9A67 /* Info.plist */,
+				DC83F519253C36BB00D92549 /* Preview Content */,
 			);
 			path = MapWidget;
 			sourceTree = "<group>";
@@ -272,6 +275,14 @@
 				DC0204662538BBEC004C9A67 /* ContentView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DC83F519253C36BB00D92549 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				DC83F51A253C36BB00D92549 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC02046C2538BBEF004C9A67 /* Preview Assets.xcassets in Resources */,
+				DC83F51B253C36BB00D92549 /* Preview Assets.xcassets in Resources */,
 				DC0204692538BBEF004C9A67 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -776,6 +788,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "MapWidget/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = 7AP949PR8S;
 				INFOPLIST_FILE = MapWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -798,6 +811,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "MapWidget/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = 7AP949PR8S;
 				INFOPLIST_FILE = MapWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

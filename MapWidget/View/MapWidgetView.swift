@@ -106,7 +106,7 @@ struct MapWidgetView: View {
     struct MapWidgetView_Previews: PreviewProvider {
         static var previews: some View {
             let mapTimelineEntry = MapTimelineEntry(date: Date(),
-                                                    mapImage: Image("MapHamburg"))
+                                                    mapImageResult: .success(Image("MapApplePark")))
 
             return Group {
                 MapWidgetView(entry: mapTimelineEntry)
