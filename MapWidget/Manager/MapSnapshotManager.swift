@@ -14,7 +14,7 @@ import SwiftUI
 final class MapSnapshotManager {
     // MARK: - Types
 
-    typealias SnapshotCompletion = (Result<Image, Error>) -> Void
+    typealias SnapshotCompletionHandler = (Result<Image, Error>) -> Void
 
     enum SnapshotError: Error {
         case noSnapshotImage
@@ -33,7 +33,7 @@ final class MapSnapshotManager {
     // MARK: - Public methods
 
     func snapshot(at centerCoordinate: CLLocationCoordinate2D,
-                  completionHandler: @escaping SnapshotCompletion) {
+                  completionHandler: @escaping SnapshotCompletionHandler) {
         let coordinateRegion = MKCoordinateRegion(center: centerCoordinate,
                                                   span: Config.coordinateSpan)
 

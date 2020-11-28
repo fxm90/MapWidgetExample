@@ -8,6 +8,7 @@
 
 import WidgetKit
 import SwiftUI
+import CoreLocation
 
 private struct MapUserLocationView: View {
     // MARK: - Config
@@ -19,13 +20,25 @@ private struct MapUserLocationView: View {
 
     // MARK: - Public properties
 
-    let mapImage: Image
+    let mapSnapshot: MapSnapshot
+
+    // MARK: - Private properties
+
+    var circleFillColor: Color {
+        switch mapSnapshot.userLocation {
+        case .currentLocation:
+            return Color.blue
+
+        case .lastKnownLocation:
+            return Color.gray
+        }
+    }
 
     // MARK: - Render
 
     var body: some View {
         ZStack {
-            mapImage
+            mapSnapshot.image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -33,7 +46,7 @@ private struct MapUserLocationView: View {
             // The map is centered on the user location, therefore we can simply draw the blue dot in the
             // center of our view to simulate the user coordinate.
             Circle()
-                .foregroundColor(Color.blue)
+                .foregroundColor(circleFillColor)
                 .overlay(
                     Circle()
                         .stroke(Color.white, lineWidth: 3)
@@ -62,8 +75,8 @@ private struct ErrorView: View {
 
     var body: some View {
         ZStack(alignment: .bottomLeading) {
-            Rectangle()
-                .foregroundColor(Config.fallbackColor)
+            Config.fallbackColor
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             if let errorMessage = errorMessage {
                 Text(errorMessage)
@@ -82,9 +95,9 @@ struct MapWidgetView: View {
     // MARK: - Render
 
     var body: some View {
-        switch entry.mapImageResult {
-        case let .success(mapImage):
-            MapUserLocationView(mapImage: mapImage)
+        switch entry.mapSnapshotResult {
+        case let .success(mapSnapshot):
+            MapUserLocationView(mapSnapshot: mapSnapshot)
 
         case let .failure(error):
             switch error {
@@ -105,8 +118,14 @@ struct MapWidgetView: View {
 #if DEBUG
     struct MapWidgetView_Previews: PreviewProvider {
         static var previews: some View {
+            let appleParkLocation = CLLocation(latitude: 37.333424329435715, longitude: -122.00546584232792)
+            let userLocation: UserLocation = .currentLocation(appleParkLocation)
+
+            let mapSnapshot = MapSnapshot(userLocation: userLocation,
+                                          image: Image("MapApplePark"))
+
             let mapTimelineEntry = MapTimelineEntry(date: Date(),
-                                                    mapImageResult: .success(Image("MapApplePark")))
+                                                    mapSnapshotResult: .success(mapSnapshot))
 
             return Group {
                 MapWidgetView(entry: mapTimelineEntry)

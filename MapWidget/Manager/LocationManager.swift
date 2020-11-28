@@ -15,11 +15,14 @@ final class LocationManager: NSObject {
     private enum Config {
         /// The type of user activity associated with the location updates.
         static let activityType: CLActivityType = .otherNavigation
+
+        /// The key we use to store the last known user location.
+        static let storageKey = "MapWidgetExample.lastKnownUserLocation"
     }
 
     // MARK: - Types
 
-    typealias RequestLocationCompletionHandler = (Result<CLLocation, Error>) -> Void
+    typealias RequestLocationCompletionHandler = (Result<UserLocation, Error>) -> Void
 
     // MARK: - Private properties
 
@@ -28,10 +31,13 @@ final class LocationManager: NSObject {
     // MARK: - Dependencies
 
     private var locationManager: CLLocationManager?
+    private let locationStorageManager: LocationStorageManaging
 
     // MARK: - Initializer
 
-    override init() {
+    init(locationStorageManager: LocationStorageManaging) {
+        self.locationStorageManager = locationStorageManager
+
         super.init()
 
         setupLocationManager()
@@ -70,7 +76,7 @@ final class LocationManager: NSObject {
         }
     }
 
-    private func resolveRequestLocationCompletionHandlers(with result: Result<CLLocation, Error>) {
+    private func resolveRequestLocationCompletionHandlers(with result: Result<UserLocation, Error>) {
         requestLocationCompletionHandlers.forEach { $0(result) }
         requestLocationCompletionHandlers.removeAll()
     }
@@ -100,11 +106,18 @@ extension LocationManager: CLLocationManagerDelegate {
             return
         }
 
-        resolveRequestLocationCompletionHandlers(with: .success(userLocation))
+        locationStorageManager.set(location: userLocation, forKey: Config.storageKey)
+
+        resolveRequestLocationCompletionHandlers(with: .success(.currentLocation(userLocation)))
     }
 
     func locationManager(_: CLLocationManager, didFailWithError error: Error) {
-        resolveRequestLocationCompletionHandlers(with: .failure(error))
+        if let lastKnownUserLocation = locationStorageManager.location(forKey: Config.storageKey) {
+            // We've previously resolved a location, and therefore use it as a fallback.
+            resolveRequestLocationCompletionHandlers(with: .success(.lastKnownLocation(lastKnownUserLocation)))
+        } else {
+            resolveRequestLocationCompletionHandlers(with: .failure(error))
+        }
     }
 }
 

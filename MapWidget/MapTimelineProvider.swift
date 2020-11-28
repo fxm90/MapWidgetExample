@@ -41,26 +41,26 @@ struct MapTimelineProvider: TimelineProvider {
 
     func placeholder(in _: Context) -> MapTimelineEntry {
         MapTimelineEntry(date: Date(),
-                         mapImageResult: .failure(MapImageResultError.placeholder))
+                         mapSnapshotResult: .failure(MapImageResultError.placeholder))
     }
 
     func getSnapshot(in _: Context,
                      completion: @escaping (MapTimelineEntry) -> Void) {
-        mapSnapshotForCurrentUserLocation { mapImageResult in
+        mapSnapshotForUserLocation { mapSnapshotResult in
             let mapTimelineEntry = MapTimelineEntry(date: Date(),
-                                                    mapImageResult: mapImageResult)
+                                                    mapSnapshotResult: mapSnapshotResult)
             completion(mapTimelineEntry)
         }
     }
 
     func getTimeline(in _: Context,
                      completion: @escaping (Timeline<MapTimelineEntry>) -> Void) {
-        mapSnapshotForCurrentUserLocation { mapImageResult in
+        mapSnapshotForUserLocation { mapSnapshotResult in
             // > Because our app can’t “predict” its future state like a Weather app, creating a timeline with a single entry that
             // > should be displayed immediately will suffice. This can be done by setting the entry’s date to the current Date().
             // https://medium.com/better-programming/how-to-create-widgets-in-ios-14-8cf58d34ce89
             let mapTimelineEntry = MapTimelineEntry(date: Date(),
-                                                    mapImageResult: mapImageResult)
+                                                    mapSnapshotResult: mapSnapshotResult)
 
             let refreshDate = Date(timeIntervalSinceNow: Config.refreshTimeInterval)
             let timeline = Timeline(entries: [mapTimelineEntry],
@@ -72,21 +72,23 @@ struct MapTimelineProvider: TimelineProvider {
 
     // MARK: - Private methods
 
-    private func mapSnapshotForCurrentUserLocation(_ completionHandler: @escaping (Result<Image, Error>) -> Void) {
+    private func mapSnapshotForUserLocation(_ completionHandler: @escaping (Result<MapSnapshot, Error>) -> Void) {
         "Start requesting map snapshot for user location..."
             .log(level: .info)
 
         locationManager.requestLocation { locationResult in
             switch locationResult {
             case let .success(userLocation):
-                "Received user location: \(userLocation.coordinate)"
+                "Received user location: \(userLocation)"
                     .log(level: .info)
 
                 mapSnapshotManager.snapshot(at: userLocation.coordinate) { mapSnapshotResult in
                     switch mapSnapshotResult {
                     case let .success(mapImage):
                         "Successfully created map image.".log(level: .info)
-                        completionHandler(.success(mapImage))
+
+                        let mapSnapshot = MapSnapshot(userLocation: userLocation, image: mapImage)
+                        completionHandler(.success(mapSnapshot))
 
                     case let .failure(error):
                         "Failed to get map snapshot: \(error.localizedDescription)".log(level: .error)

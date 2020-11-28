@@ -30,7 +30,7 @@ struct MapWidget: Widget {
 
     // MARK: - Dependencies
 
-    private let locationManager = LocationManager()
+    private let locationManager = LocationManager(locationStorageManager: UserDefaults.standard)
     private let mapSnapshotManager = MapSnapshotManager()
 
     // MARK: - Render

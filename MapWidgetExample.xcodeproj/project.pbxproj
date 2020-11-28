@@ -27,8 +27,11 @@
 		DC0204F52538C083004C9A67 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0204F02538C083004C9A67 /* LocationManager.swift */; };
 		DC0204FB2538C0CF004C9A67 /* MapTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0204FA2538C0CF004C9A67 /* MapTimelineProvider.swift */; };
 		DC2297E32538CD870084FE6B /* Equatable+IsAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2297E22538CD870084FE6B /* Equatable+IsAnyOf.swift */; };
+		DC2CEA2A2571338B00BBDC29 /* MapSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2CEA292571338B00BBDC29 /* MapSnapshot.swift */; };
+		DC2CEA2F257134CD00BBDC29 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2CEA2E257134CD00BBDC29 /* UserLocation.swift */; };
+		DC5E418025727223009D5C08 /* LocationStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5E417F25727223009D5C08 /* LocationStorageManager.swift */; };
+		DC5E418425727704009D5C08 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC83F51A253C36BB00D92549 /* Preview Assets.xcassets */; };
 		DC83F5042539A88300D92549 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83F5032539A88300D92549 /* LocationManager.swift */; };
-		DC83F51B253C36BB00D92549 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC83F51A253C36BB00D92549 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +98,9 @@
 		DC0204F02538C083004C9A67 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DC0204FA2538C0CF004C9A67 /* MapTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTimelineProvider.swift; sourceTree = "<group>"; };
 		DC2297E22538CD870084FE6B /* Equatable+IsAnyOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Equatable+IsAnyOf.swift"; sourceTree = "<group>"; };
+		DC2CEA292571338B00BBDC29 /* MapSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSnapshot.swift; sourceTree = "<group>"; };
+		DC2CEA2E257134CD00BBDC29 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		DC5E417F25727223009D5C08 /* LocationStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStorageManager.swift; sourceTree = "<group>"; };
 		DC83F5032539A88300D92549 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		DC83F51A253C36BB00D92549 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DEBE30711FAB0C2622819A01 /* Pods-MapWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapWidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-MapWidgetExtension/Pods-MapWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -239,7 +245,9 @@
 		DC0204EA2538C083004C9A67 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				DC2CEA292571338B00BBDC29 /* MapSnapshot.swift */,
 				DC0204EB2538C083004C9A67 /* MapTimelineEntry.swift */,
+				DC2CEA2E257134CD00BBDC29 /* UserLocation.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -257,6 +265,7 @@
 			children = (
 				DC0204EF2538C083004C9A67 /* MapSnapshotManager.swift */,
 				DC0204F02538C083004C9A67 /* LocationManager.swift */,
+				DC5E417F25727223009D5C08 /* LocationStorageManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -394,7 +403,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC02046C2538BBEF004C9A67 /* Preview Assets.xcassets in Resources */,
-				DC83F51B253C36BB00D92549 /* Preview Assets.xcassets in Resources */,
 				DC0204692538BBEF004C9A67 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +418,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC5E418425727704009D5C08 /* Preview Assets.xcassets in Resources */,
 				DC0204CC2538BE85004C9A67 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,8 +559,11 @@
 				DC0204F52538C083004C9A67 /* LocationManager.swift in Sources */,
 				DC0204FB2538C0CF004C9A67 /* MapTimelineProvider.swift in Sources */,
 				DC0204F42538C083004C9A67 /* MapSnapshotManager.swift in Sources */,
+				DC5E418025727223009D5C08 /* LocationStorageManager.swift in Sources */,
 				DC0204F12538C083004C9A67 /* String+Log.swift in Sources */,
 				DC0204F32538C083004C9A67 /* MapWidgetView.swift in Sources */,
+				DC2CEA2A2571338B00BBDC29 /* MapSnapshot.swift in Sources */,
+				DC2CEA2F257134CD00BBDC29 /* UserLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
