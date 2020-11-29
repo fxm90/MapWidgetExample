@@ -14,35 +14,28 @@ protocol LocationStorageManaging {
     func location(forKey key: String) -> CLLocation?
 }
 
-/// Based on https://stackoverflow.com/a/18910861/3532505
+/// Based on <https://stackoverflow.com/a/29987303/3532505> and <https://stackoverflow.com/a/27848617/3532505>.
 extension UserDefaults: LocationStorageManaging {
-    // MARK: - Config
-
-    private enum Config {
-        static let latitudeKey = "latitude"
-        static let longitudeKey = "longitude"
-    }
-
-    // MARK: - Public methods
-
     func set(location: CLLocation, forKey key: String) {
-        let locationAsDictionary = [
-            Config.latitudeKey: NSNumber(value: location.coordinate.latitude),
-            Config.longitudeKey: NSNumber(value: location.coordinate.longitude)
-        ]
-
-        set(locationAsDictionary, forKey: key)
+        do {
+            let encodedLocationData = try NSKeyedArchiver.archivedData(withRootObject: location, requiringSecureCoding: true)
+            set(encodedLocationData, forKey: key)
+        } catch {
+            "Could not store location in user-defaults: \(error.localizedDescription)".log(level: .error)
+        }
     }
 
     func location(forKey key: String) -> CLLocation? {
-        guard
-            let locationAsDictionary = object(forKey: key) as? [String: NSNumber],
-            let latitude = locationAsDictionary[Config.latitudeKey]?.doubleValue,
-            let longitude = locationAsDictionary[Config.longitudeKey]?.doubleValue
-        else {
+        guard let decodedLocationData = data(forKey: key) else {
+            "Couldn't find location data for key \(key)".log(level: .error)
             return nil
         }
 
-        return CLLocation(latitude: latitude, longitude: longitude)
+        do {
+            return try NSKeyedUnarchiver.unarchivedObject(ofClass: CLLocation.self, from: decodedLocationData)
+        } catch {
+            "Couldn't decode location: \(error.localizedDescription)".log(level: .error)
+            return nil
+        }
     }
 }

@@ -16,6 +16,10 @@ private struct MapUserLocationView: View {
     private enum Config {
         /// The size of the blue dot reflecting the user location.
         static let userLocationDotSize: CGFloat = 20
+
+        /// If a user-location is older then the given time interval we assume it's outdated and therefore
+        /// apply another `foregroundColor` to the dot, reflecting the user-location.
+        static let validUserLocationTimeInterval: TimeInterval = 5 * 60
     }
 
     // MARK: - Public properties
@@ -25,13 +29,9 @@ private struct MapUserLocationView: View {
     // MARK: - Private properties
 
     var circleFillColor: Color {
-        switch mapSnapshot.userLocation {
-        case .currentLocation:
-            return Color.blue
-
-        case .lastKnownLocation:
-            return Color.gray
-        }
+        mapSnapshot.userLocation.timestamp > Date(timeIntervalSinceNow: -Config.validUserLocationTimeInterval)
+            ? .blue
+            : .gray
     }
 
     // MARK: - Render
@@ -95,20 +95,17 @@ struct MapWidgetView: View {
     // MARK: - Render
 
     var body: some View {
-        switch entry.mapSnapshotResult {
+        switch entry.state {
         case let .success(mapSnapshot):
             MapUserLocationView(mapSnapshot: mapSnapshot)
 
         case let .failure(error):
-            switch error {
-            case MapTimelineProvider.MapImageResultError.placeholder:
-                /// The timeline provider asked for a placeholder synchronously.
-                /// Therefore we simply show the `MapErrorView` without a specific `errorMessage`.
-                ErrorView(errorMessage: nil)
+            ErrorView(errorMessage: error.localizedDescription)
 
-            default:
-                ErrorView(errorMessage: error.localizedDescription)
-            }
+        case .placeholder:
+            /// The timeline provider asked for a placeholder synchronously.
+            /// Therefore we simply show the `MapErrorView` without a specific `errorMessage`.
+            ErrorView(errorMessage: nil)
         }
     }
 }
@@ -119,13 +116,11 @@ struct MapWidgetView: View {
     struct MapWidgetView_Previews: PreviewProvider {
         static var previews: some View {
             let appleParkLocation = CLLocation(latitude: 37.333424329435715, longitude: -122.00546584232792)
-            let userLocation: UserLocation = .currentLocation(appleParkLocation)
-
-            let mapSnapshot = MapSnapshot(userLocation: userLocation,
+            let mapSnapshot = MapSnapshot(userLocation: appleParkLocation,
                                           image: Image("MapApplePark"))
 
             let mapTimelineEntry = MapTimelineEntry(date: Date(),
-                                                    mapSnapshotResult: .success(mapSnapshot))
+                                                    state: .success(mapSnapshot))
 
             return Group {
                 MapWidgetView(entry: mapTimelineEntry)

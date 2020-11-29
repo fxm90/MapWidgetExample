@@ -17,14 +17,6 @@ struct MapTimelineProvider: TimelineProvider {
         static let refreshTimeInterval: TimeInterval = 60
     }
 
-    // MARK: - Types
-
-    enum MapImageResultError: Error {
-        /// The timeline provider asked for a placeholder synchronously.
-        /// Therefore we can't retrieve a real user-location and map snapshot.
-        case placeholder
-    }
-
     // MARK: - Dependencies
 
     private let locationManager: LocationManager
@@ -40,15 +32,16 @@ struct MapTimelineProvider: TimelineProvider {
     // MARK: - Public methods
 
     func placeholder(in _: Context) -> MapTimelineEntry {
-        MapTimelineEntry(date: Date(),
-                         mapSnapshotResult: .failure(MapImageResultError.placeholder))
+        /// The timeline provider asked for a placeholder synchronously.
+        /// Therefore we can't retrieve a real user-location and map snapshot.
+        MapTimelineEntry(date: Date(), state: .placeholder)
     }
 
     func getSnapshot(in _: Context,
                      completion: @escaping (MapTimelineEntry) -> Void) {
         mapSnapshotForUserLocation { mapSnapshotResult in
             let mapTimelineEntry = MapTimelineEntry(date: Date(),
-                                                    mapSnapshotResult: mapSnapshotResult)
+                                                    state: MapTimelineEntry.State(result: mapSnapshotResult))
             completion(mapTimelineEntry)
         }
     }
@@ -60,7 +53,7 @@ struct MapTimelineProvider: TimelineProvider {
             // > should be displayed immediately will suffice. This can be done by setting the entry’s date to the current Date().
             // https://medium.com/better-programming/how-to-create-widgets-in-ios-14-8cf58d34ce89
             let mapTimelineEntry = MapTimelineEntry(date: Date(),
-                                                    mapSnapshotResult: mapSnapshotResult)
+                                                    state: MapTimelineEntry.State(result: mapSnapshotResult))
 
             let refreshDate = Date(timeIntervalSinceNow: Config.refreshTimeInterval)
             let timeline = Timeline(entries: [mapTimelineEntry],
@@ -100,6 +93,23 @@ struct MapTimelineProvider: TimelineProvider {
                 "Failed to get user location: \(error.localizedDescription)".log(level: .error)
                 completionHandler(.failure(error))
             }
+        }
+    }
+}
+
+// MARK: - Helpers
+
+private extension MapTimelineEntry.State {
+    /// Maps the given result to our own state.
+    ///
+    /// - Parameter result: Swift's result type that represents either a successfully created map-snapshot or an occurred error.
+    init(result: Result<MapSnapshot, Error>) {
+        switch result {
+        case let .success(mapSnapshot):
+            self = .success(mapSnapshot)
+
+        case let .failure(error):
+            self = .failure(error)
         }
     }
 }

@@ -7,10 +7,11 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct MapSnapshot {
     /// The resolved user location.
-    let userLocation: UserLocation
+    let userLocation: CLLocation
 
     /// The map-snapshot image for the resolved user location.
     let image: Image

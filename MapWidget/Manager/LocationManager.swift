@@ -16,13 +16,16 @@ final class LocationManager: NSObject {
         /// The type of user activity associated with the location updates.
         static let activityType: CLActivityType = .otherNavigation
 
+        /// The accuracy of the location data we want to receive.
+        static let desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+
         /// The key we use to store the last known user location.
         static let storageKey = "MapWidgetExample.lastKnownUserLocation"
     }
 
     // MARK: - Types
 
-    typealias RequestLocationCompletionHandler = (Result<UserLocation, Error>) -> Void
+    typealias RequestLocationCompletionHandler = (Result<CLLocation, Error>) -> Void
 
     // MARK: - Private properties
 
@@ -72,11 +75,12 @@ final class LocationManager: NSObject {
             self.locationManager = locationManager
 
             locationManager.activityType = Config.activityType
+            locationManager.desiredAccuracy = Config.desiredAccuracy
             locationManager.delegate = self
         }
     }
 
-    private func resolveRequestLocationCompletionHandlers(with result: Result<UserLocation, Error>) {
+    private func resolveRequestLocationCompletionHandlers(with result: Result<CLLocation, Error>) {
         requestLocationCompletionHandlers.forEach { $0(result) }
         requestLocationCompletionHandlers.removeAll()
     }
@@ -108,13 +112,20 @@ extension LocationManager: CLLocationManagerDelegate {
 
         locationStorageManager.set(location: userLocation, forKey: Config.storageKey)
 
-        resolveRequestLocationCompletionHandlers(with: .success(.currentLocation(userLocation)))
+        resolveRequestLocationCompletionHandlers(with: .success(userLocation))
     }
 
     func locationManager(_: CLLocationManager, didFailWithError error: Error) {
+        if let locationError = error as? CLError, locationError.code == CLError.Code.locationUnknown {
+            // > If the location service is unable to retrieve a location right away, it reports a `CLError.Code.locationUnknown` error and
+            // > keeps trying. In such a situation, you can simply ignore the error and wait for a new event.
+            // https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423786-locationmanager
+            return
+        }
+
         if let lastKnownUserLocation = locationStorageManager.location(forKey: Config.storageKey) {
             // We've previously resolved a location, and therefore use it as a fallback.
-            resolveRequestLocationCompletionHandlers(with: .success(.lastKnownLocation(lastKnownUserLocation)))
+            resolveRequestLocationCompletionHandlers(with: .success(lastKnownUserLocation))
         } else {
             resolveRequestLocationCompletionHandlers(with: .failure(error))
         }

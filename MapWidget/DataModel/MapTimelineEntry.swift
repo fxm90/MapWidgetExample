@@ -7,12 +7,26 @@
 //
 
 import WidgetKit
-import SwiftUI
 
 struct MapTimelineEntry: TimelineEntry {
+    // MARK: - Types
+
+    enum State {
+        /// The timeline provider asked for a placeholder.
+        case placeholder
+
+        /// We resolved a user-location and successfully created the map-snapshot.
+        case success(MapSnapshot)
+
+        /// An error occurred.
+        case failure(Error)
+    }
+
+    // MARK: - Public properties
+
     /// The date to display the widget. This property is required by the protocol `TimelineEntry`.
     let date: Date
 
-    /// The result of the location-manager and map-snapshot-manager.
-    let mapSnapshotResult: Result<MapSnapshot, Error>
+    /// The current state of our entry.
+    let state: State
 }
