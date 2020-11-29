@@ -8,6 +8,7 @@ target 'MapWidgetExample' do
   # Pods for MapWidgetExample
   pod 'SwiftFormat/CLI', '~> 0.40'
   pod 'SwiftLint', '~> 0.36'
+  pod 'SwiftConfigurationFiles', :git => 'https://github.com/fxm90/Swift-Configuration-Files.git'
 
   target 'MapWidgetExampleTests' do
     inherit! :search_paths
