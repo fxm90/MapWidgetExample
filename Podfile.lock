@@ -1,12 +1,12 @@
 PODS:
   - SwiftConfigurationFiles (0.0.1)
   - SwiftFormat/CLI (0.47.5)
-  - SwiftLint (0.41.0)
+  - SwiftLint (0.42.0)
 
 DEPENDENCIES:
   - SwiftConfigurationFiles (from `https://github.com/fxm90/Swift-Configuration-Files.git`)
-  - SwiftFormat/CLI (~> 0.40)
-  - SwiftLint (~> 0.36)
+  - SwiftFormat/CLI (~> 0.41)
+  - SwiftLint (~> 0.42)
 
 SPEC REPOS:
   trunk:
@@ -25,8 +25,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   SwiftConfigurationFiles: 1cf2228a911ebed9f42f8dec077bb634f04ca6c8
   SwiftFormat: 5e93cab5ee8334f93ddc50aeb1a98d29b99054db
-  SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
 
-PODFILE CHECKSUM: 4ca3937795be4c5a42b98582a12239f4795744b2
+PODFILE CHECKSUM: 5b98ee9d469d4822b285622abe3a13042ba29a6e
 
-COCOAPODS: 1.10.0.beta.1
+COCOAPODS: 1.10.0

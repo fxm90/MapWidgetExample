@@ -6,8 +6,8 @@ target 'MapWidgetExample' do
   use_frameworks!
 
   # Pods for MapWidgetExample
-  pod 'SwiftFormat/CLI', '~> 0.40'
-  pod 'SwiftLint', '~> 0.36'
+  pod 'SwiftFormat/CLI', '~> 0.41'
+  pod 'SwiftLint', '~> 0.42'
   pod 'SwiftConfigurationFiles', :git => 'https://github.com/fxm90/Swift-Configuration-Files.git'
 
   target 'MapWidgetExampleTests' do
