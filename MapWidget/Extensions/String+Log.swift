@@ -19,48 +19,31 @@ extension String {
 
     // MARK: - Private properties
 
-    /// Returns the current date/time as string.
-    private var logDate: String {
+    /// The formatter we use to prefix the log output with the current date and time.
+    private static let logDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
 
-        let now = Date()
-        return dateFormatter.string(from: now)
-    }
+        return dateFormatter
+    }()
 
     // MARK: - Public methods
 
-    func log(level: LogLevel, file: String = #file, function: String = #function, line: UInt = #line) {
+    func log(level: LogLevel, file: String = #file, function _: String = #function, line: UInt = #line) {
         #if DEBUG
-            var logString: String
+            let logIcon: Character
             switch level {
             case .info:
-                logString = "ℹ️ – "
+                logIcon = "ℹ️"
 
             case .error:
-                logString = "⚠️ – "
+                logIcon = "⚠️"
             }
 
-            let logPrefix = self.logPrefix(fileName: extractFilename(from: file),
-                                           functionName: function,
-                                           line: line)
+            let formattedDate = Self.logDateFormatter.string(from: Date())
+            let filename = URL(fileURLWithPath: file).lastPathComponent
 
-            logString += "\(logDate) - \(logPrefix)\n"
-            logString += "> \(self)\n"
-
-            print(logString)
+            print("\(logIcon) – \(formattedDate) – \(filename):\(line) \(self)")
         #endif
-    }
-
-    // MARK: - Private methods
-
-    /// Extracts the filename of the entire path.
-    private func extractFilename(from filePath: String) -> String {
-        URL(fileURLWithPath: filePath).lastPathComponent
-    }
-
-    /// Returns the prefix (containing file name, function name and line) for the log statement.
-    private func logPrefix(fileName: String, functionName: String, line: UInt) -> String {
-        "\(fileName) - \(functionName):\(line)"
     }
 }
