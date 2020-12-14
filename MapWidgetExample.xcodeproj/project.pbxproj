@@ -501,7 +501,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SWIFTLINT=\"${PODS_ROOT}/SwiftLint/swiftlint\"\nif [ ! -f \"$SWIFTLINT\" ]; then\n    echo \"warning: SwiftLint not installed!\"\n    exit 1\nfi\n\n$SWIFTLINT --config \"Pods/SwiftConfigurationFiles/.swiftlint.yml\"\n";
+			shellScript = "SWIFTLINT=\"${PODS_ROOT}/SwiftLint/swiftlint\"\nif [ ! -f \"$SWIFTLINT\" ]; then\n    echo \"warning: SwiftLint not installed!\"\n    exit 1\nfi\n\n$SWIFTLINT\n";
 		};
 		EB3194DF2C7C04DF08806FC7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
